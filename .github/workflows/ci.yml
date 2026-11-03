@@ -39,9 +39,15 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+      
+      - name: Run tests with coverage
+        run: npm run coverage
 
-      - name: Run tests
-        run: npm run test:run
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: coverage/
 
   build:
     runs-on: ubuntu-latest
@@ -61,3 +67,9 @@ jobs:
 
       - name: Build
         run: npm run build
+      
+      - name: Upload build dist
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-files
+          path: dist/
